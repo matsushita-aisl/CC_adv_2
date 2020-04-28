@@ -2,6 +2,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.*;
 import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 
 public class DateTest {
@@ -20,18 +21,19 @@ public class DateTest {
         InputYear();
         InputMonth();
         
-        LocalDate startDate = LocalDate.of(year, month, 1);
-        LocalDate lastDate = startDate.plusMonths(1).minusDays(1);
+        LocalDate startDate = LocalDate.of(year, month, 1);	//対象月はじめ
+        LocalDate nextDate = startDate.plusMonths(1);	//翌月はじめ
         
-        for(LocalDate date = startDate; date.getDayOfMonth() <= lastDate.getDayOfMonth(); date = date.plusDays(1)){
-        	System.out.println(date.getDayOfMonth() + "" + 
-        			date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE));
+        //日にちを一日ずつずらしていって，次の月に行ったら（最終日を実行したら）終了
+        for(LocalDate date = startDate; !date.equals(nextDate); date = date.plusDays(1)){
+        	//日付表示．getDisplayNameで日本語フォーマットを指定
+        	System.out.print(date.getDayOfMonth() + "(" + 
+        			date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE) + ")");
+        	
+        	if(date.getDayOfWeek() == DayOfWeek.SATURDAY){	//週末（土曜）なら改行
+            	System.out.println("");
+        	}
         }
-        
-//        for(int date = 1; date <= lastDate; date++){
-//        	System.out.print(date + " ");
-//        }
-        
 	}
 	
 	//年入力用関数
@@ -47,7 +49,7 @@ public class DateTest {
 			
 			year = Integer.parseInt(str);
 			if(!(YEAR_MIN <= year && year <= YEAR_MAX)){
-				System.out.println(YEAR_MIN + "から" + YEAR_MAX + "の範囲で入力して下さい");
+				System.out.println("[Error]" + YEAR_MIN + "から" + YEAR_MAX + "の範囲で入力して下さい");
 			}else{
 				break;
 			}
@@ -68,7 +70,7 @@ public class DateTest {
 			
 			month = Integer.parseInt(str);
 			if(!(MONTH_MIN <= month && month <= MONTH_MAX)){
-				System.out.println(MONTH_MIN + "から" + MONTH_MAX + "の範囲で入力して下さい");
+				System.out.println("[Error]" + MONTH_MIN + "から" + MONTH_MAX + "の範囲で入力して下さい");
 			}else{
 				break;
 			}
