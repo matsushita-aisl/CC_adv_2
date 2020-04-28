@@ -1,6 +1,8 @@
-import java.util.Calendar;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.*;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 
 public class DateTest {
 	
@@ -18,22 +20,17 @@ public class DateTest {
         InputYear();
         InputMonth();
         
-        month --;
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, 1);
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate lastDate = startDate.plusMonths(1).minusDays(1);
         
-        int startDay = cal.get(Calendar.DAY_OF_WEEK);
-        
-        cal.add(Calendar.MONTH, 1);
-        cal.add(Calendar.DATE, -1);
-        int lastDay = cal.get(Calendar.DAY_OF_WEEK);
-        int lastDate = cal.get(Calendar.DATE);
-        
-        System.out.println(Calendar.MONDAY);
-        
-        for(int date = 1; date <= lastDate; date++){
-        	System.out.print(date + " ");
+        for(LocalDate date = startDate; date.getDayOfMonth() <= lastDate.getDayOfMonth(); date = date.plusDays(1)){
+        	System.out.println(date.getDayOfMonth() + "" + 
+        			date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE));
         }
+        
+//        for(int date = 1; date <= lastDate; date++){
+//        	System.out.print(date + " ");
+//        }
         
 	}
 	
