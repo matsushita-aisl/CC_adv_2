@@ -6,6 +6,7 @@ public class DateTest {
 	
 	public static final int YEAR_MIN = 1900, YEAR_MAX = 2100;	//年の範囲
 	public static final int MONTH_MIN = 1, MONTH_MAX = 12;		//月の範囲
+	public static final String[] DoW = {"日", "月", "火", "水", "木", "金", "土"};
 	
 	static Scanner scanner = new Scanner(System.in);
 	static String str;
@@ -19,22 +20,24 @@ public class DateTest {
         InputMonth();
         
         month --;
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, 1);
+        Calendar start = Calendar.getInstance(), last = Calendar.getInstance();
+        start.clear();
+        last.clear();
         
-        int startDay = cal.get(Calendar.DAY_OF_WEEK);
-        
-        cal.add(Calendar.MONTH, 1);
-        cal.add(Calendar.DATE, -1);
-        int lastDay = cal.get(Calendar.DAY_OF_WEEK);
-        int lastDate = cal.get(Calendar.DATE);
-        
-        System.out.println(Calendar.MONDAY);
-        
-        for(int date = 1; date <= lastDate; date++){
-        	System.out.print(date + " ");
+        start.set(year, month, 1);
+
+        if(month != 11){
+        	last.set(year, month + 1, 1);
+        }else{
+        	last.set(year + 1, 0, 1);
         }
         
+        System.out.println("start:"+start.get(Calendar.MONTH)+"/"+start.get(Calendar.DATE));
+        System.out.println("last:"+last.get(Calendar.MONTH)+"/"+last.get(Calendar.DATE));
+        
+        for(Calendar current = (Calendar)start.clone(); !current.equals(last); current.add(Calendar.DATE, 1)){
+        	System.out.print(current.get(Calendar.DATE) + "(" + current.get(Calendar.DAY_OF_WEEK) + ")");
+        }
 	}
 	
 	//年入力用関数
