@@ -11,33 +11,33 @@ public class DateTest {
 	static Scanner scanner = new Scanner(System.in);
 	static String str;
 	static String regex = "^-?[0-9]*$";	//半角数字列の正規表現
-    static Pattern p = Pattern.compile(regex);
-    static Matcher m;
-    static int year, month;
-    
+	static Pattern p = Pattern.compile(regex);
+	static Matcher m;
+	static int year, month;
+	
 	public static void main(String[] args) {
-        InputYear();
-        InputMonth();
-        
-        month --;
-        Calendar start = Calendar.getInstance(), last = Calendar.getInstance();
-        start.clear();
-        last.clear();
-        
-        start.set(year, month, 1);
+		InputYear();
+		InputMonth();
+		
+		month --;
+		Calendar start = Calendar.getInstance(), last = Calendar.getInstance();
+		start.clear();
+		last.clear();
+		
+		start.set(year, month, 1);
 
-        if(month != 11){
-        	last.set(year, month + 1, 1);
-        }else{
-        	last.set(year + 1, 0, 1);
-        }
-        
-        System.out.println("start:"+start.get(Calendar.MONTH)+"/"+start.get(Calendar.DATE));
-        System.out.println("last:"+last.get(Calendar.MONTH)+"/"+last.get(Calendar.DATE));
-        
-        for(Calendar current = (Calendar)start.clone(); !current.equals(last); current.add(Calendar.DATE, 1)){
-        	System.out.print(current.get(Calendar.DATE) + "(" + current.get(Calendar.DAY_OF_WEEK) + ")");
-        }
+		if(month != 11){
+			last.set(year, month + 1, 1);
+		}else{
+			last.set(year + 1, 0, 1);
+		}
+		
+		System.out.println("start:"+start.get(Calendar.MONTH)+"/"+start.get(Calendar.DATE));
+		System.out.println("last:"+last.get(Calendar.MONTH)+"/"+last.get(Calendar.DATE));
+
+		for(Calendar current = (Calendar)start.clone(); !current.equals(last); current.add(Calendar.DATE, 1)){
+			System.out.print(current.get(Calendar.DATE) + "(" + current.get(Calendar.DAY_OF_WEEK) + ")");
+		}
 	}
 	
 	//年入力用関数
