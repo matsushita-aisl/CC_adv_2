@@ -13,27 +13,27 @@ public class DateTest {
 	static Scanner scanner = new Scanner(System.in);
 	static String str;
 	static String regex = "^-?[0-9]*$";	//半角数字列の正規表現
-    static Pattern p = Pattern.compile(regex);
-    static Matcher m;
-    static int year, month;
-    
+	static Pattern p = Pattern.compile(regex);
+	static Matcher m;
+	static int year, month;
+	
 	public static void main(String[] args) {
-        InputYear();
-        InputMonth();
-        
-        LocalDate startDate = LocalDate.of(year, month, 1);	//対象月はじめ
-        LocalDate nextDate = startDate.plusMonths(1);	//翌月はじめ
-        
-        //日にちを一日ずつずらしていって，次の月に行ったら（最終日を実行したら）終了
-        for(LocalDate date = startDate; !date.equals(nextDate); date = date.plusDays(1)){
-        	//日付表示．getDisplayNameで日本語フォーマットを指定
-        	System.out.print(date.getDayOfMonth() + "(" + 
-        			date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE) + ")");
-        	
-        	if(date.getDayOfWeek() == DayOfWeek.SATURDAY){	//週末（土曜）なら改行
-            	System.out.println("");
-        	}
-        }
+		InputYear();
+		InputMonth();
+		
+		LocalDate startDate = LocalDate.of(year, month, 1);	//対象月はじめ
+		LocalDate nextDate = startDate.plusMonths(1);	//翌月はじめ
+		
+		//日にちを一日ずつずらしていって，次の月に行ったら（最終日を実行したら）終了
+		for(LocalDate date = startDate; !date.equals(nextDate); date = date.plusDays(1)){
+			//日付表示．getDisplayNameで日本語フォーマットを指定
+			System.out.print(date.getDayOfMonth() + "(" + 
+					date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE) + ")");
+			
+			if(date.getDayOfWeek() == DayOfWeek.SATURDAY){	//週末（土曜）なら改行
+				System.out.println("");
+			}
+		}
 	}
 	
 	//年入力用関数
