@@ -1,4 +1,5 @@
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.*;
 
@@ -8,35 +9,39 @@ public class DateTest {
 	public static final int MONTH_MIN = 1, MONTH_MAX = 12;		//月の範囲
 	public static final String[] DoW = {"日", "月", "火", "水", "木", "金", "土"};
 	
-	static Scanner scanner = new Scanner(System.in);
-	static String str;
+	static Scanner scanner = new Scanner(System.in);	//キーボード入力受付用
+	static String str;	//キーボード入力文字列格納
 	static String regex = "^-?[0-9]*$";	//半角数字列の正規表現
 	static Pattern p = Pattern.compile(regex);
 	static Matcher m;
-	static int year, month;
+	static int year, month;	//年月
 	
 	public static void main(String[] args) {
-		InputYear();
-		InputMonth();
+		InputYear();	//年入力受付（下に定義した関数参照）
+		InputMonth();	//月入力受付（　　　　〃　　　　　）
 		
 		month --;
 		Calendar start = Calendar.getInstance(), last = Calendar.getInstance();
 		start.clear();
 		last.clear();
 		
-		start.set(year, month, 1);
+		start.set(year, month, 1);	//入力された年月の1日目
 
 		if(month != 11){
-			last.set(year, month + 1, 1);
+			last.set(year, month + 1, 1);	//入力された年月の翌月の1日目
 		}else{
-			last.set(year + 1, 0, 1);
+			last.set(year + 1, 0, 1);	//startが12月だったら翌月初めは次の年の正月
 		}
-		
-		System.out.println("start:"+start.get(Calendar.MONTH)+"/"+start.get(Calendar.DATE));
-		System.out.println("last:"+last.get(Calendar.MONTH)+"/"+last.get(Calendar.DATE));
 
 		for(Calendar current = (Calendar)start.clone(); !current.equals(last); current.add(Calendar.DATE, 1)){
-			System.out.print(current.get(Calendar.DATE) + "(" + current.get(Calendar.DAY_OF_WEEK) + ")");
+			System.out.print(current.get(Calendar.DATE) + "(" + DoW[current.get(Calendar.DAY_OF_WEEK) - 1] + ")");
+			
+			//これでもできます
+			//System.out.print(current.get(Calendar.DATE) + "(" + current.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.JAPANESE) + ")");
+			
+			if(current.get(Calendar.DAY_OF_WEEK) == 7){
+				System.out.println("");
+			}
 		}
 	}
 	
