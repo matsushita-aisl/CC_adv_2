@@ -58,7 +58,7 @@ public class DateTest {
 			
 			year = Integer.parseInt(str);
 			if(!(YEAR_MIN <= year && year <= YEAR_MAX)){
-				System.out.println(YEAR_MIN + "から" + YEAR_MAX + "の範囲で入力して下さい");
+				System.out.println("[Error]" + YEAR_MIN + "から" + YEAR_MAX + "の範囲で入力して下さい");
 			}else{
 				break;
 			}
@@ -79,7 +79,7 @@ public class DateTest {
 			
 			month = Integer.parseInt(str);
 			if(!(MONTH_MIN <= month && month <= MONTH_MAX)){
-				System.out.println(MONTH_MIN + "から" + MONTH_MAX + "の範囲で入力して下さい");
+				System.out.println("[Error]" + MONTH_MIN + "から" + MONTH_MAX + "の範囲で入力して下さい");
 			}else{
 				break;
 			}
