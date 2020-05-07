@@ -1,7 +1,14 @@
+/**************************
+*パターンマッチングの手法はちょっと変えています
+*こういう手法もあるということだけの紹介です
+**************************/
+
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.*;
+
+
 
 public class DateTest {
 	
@@ -12,8 +19,10 @@ public class DateTest {
 	static Scanner scanner = new Scanner(System.in);	//キーボード入力受付用
 	static String str;	//キーボード入力文字列格納
 	static String regex = "^-?[0-9]*$";	//半角数字列の正規表現
+	//パターンマッチング用
 	static Pattern p = Pattern.compile(regex);
 	static Matcher m;
+	
 	static int year, month;	//年月
 	
 	public static void main(String[] args) {
@@ -43,6 +52,7 @@ public class DateTest {
 				System.out.println("");
 			}
 		}
+		scanner.close();
 	}
 	
 	//年入力用関数
