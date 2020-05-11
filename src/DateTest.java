@@ -1,9 +1,17 @@
+/*********
+パターンマッチングの手法をちょっと変えていますが
+こういうのもある，というだけですので
+Stringのmatches()でも全然大丈夫です
+*********/
+
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.*;
 import java.time.LocalDate;
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
+
+
 
 public class DateTest {
 	
