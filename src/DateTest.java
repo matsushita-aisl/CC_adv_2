@@ -18,7 +18,6 @@ public class DateTest {
 	public static final int YEAR_MIN = 1900, YEAR_MAX = 2100;	//年の範囲
 	public static final int MONTH_MIN = 1, MONTH_MAX = 12;		//月の範囲
 	
-	static Scanner scanner = new Scanner(System.in);
 	static String str;
 	static String regex = "^-?[0-9]*$";	//半角数字列の正規表現
 	static Pattern p = Pattern.compile(regex);
@@ -26,9 +25,10 @@ public class DateTest {
 	static int year, month;
 	
 	public static void main(String[] args) {
-		InputYear();
-		InputMonth();
-		scanner.close();
+		try(Scanner scanner = new Scanner(System.in)){	//try-with-resource文によりscannerを自動的に閉じてくれる
+			InputYear(scanner);
+			InputMonth(scanner);
+		}
 		
 		LocalDate startDate = LocalDate.of(year, month, 1);	//対象月はじめ
 		LocalDate nextDate = startDate.plusMonths(1);	//翌月はじめ
@@ -46,7 +46,7 @@ public class DateTest {
 	}
 	
 	//年入力用関数
-	static void InputYear(){
+	static void InputYear(Scanner scanner){
 		while(true){
 			System.out.print("カレンダーの年(半角数字)を入力して下さい > ");
 			str = scanner.next();
@@ -67,7 +67,7 @@ public class DateTest {
 	}
 	
 	//月入力用関数
-	static void InputMonth(){
+	static void InputMonth(Scanner scanner){
 		while(true){
 			System.out.print("カレンダーの月(半角数字)を入力して下さい > ");
 			str = scanner.next();
