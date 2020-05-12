@@ -28,13 +28,14 @@ public class DateTest {
 	public static void main(String[] args) {
 		InputYear();
 		InputMonth();
+		scanner.close();
 		
 		LocalDate startDate = LocalDate.of(year, month, 1);	//対象月はじめ
 		LocalDate nextDate = startDate.plusMonths(1);	//翌月はじめ
 		
 		//日にちを一日ずつずらしていって，次の月に行ったら（最終日を実行したら）終了
 		for(LocalDate date = startDate; !date.equals(nextDate); date = date.plusDays(1)){
-			//日付表示．getDisplayNameで日本語フォーマットを指定
+			//日付表示．getDisplayName()で日本語フォーマットを指定
 			System.out.print(date.getDayOfMonth() + "(" + 
 					date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.JAPANESE) + ")");
 			
