@@ -24,9 +24,13 @@ public class DateTest {
 	static Matcher m;
 	static int year, month;
 	
+	
 	public static void main(String[] args) {
-		InputYear();
-		InputMonth();
+		
+		try(Scanner scanner = new Scanner(System.in)){	//try-with-resource文によりscannerを自動的に閉じてくれる
+			InputYear(scanner);
+			InputMonth(scanner);
+		}
 		
 		LocalDate startDate = LocalDate.of(year, month, 1);	//対象月はじめ
 		LocalDate nextDate = startDate.plusMonths(1);	//翌月はじめ
@@ -44,46 +48,46 @@ public class DateTest {
 	}
 	
 	//年入力用関数
-	static void InputYear(){
-		try(Scanner scanner = new Scanner(System.in)){	//try-with-resource文によりscannerを自動的に閉じてくれる
-			while(true){
-				System.out.print("カレンダーの年(半角数字)を入力して下さい > ");
-				str = scanner.next();
-				m = p.matcher(str);
-				if(!m.find()){
-					System.out.println("[Error]数字を入力して下さい > ");
-					continue;
-				}
-				
-				year = Integer.parseInt(str);
-				if(!(YEAR_MIN <= year && year <= YEAR_MAX)){
-					System.out.println("[Error]" + YEAR_MIN + "から" + YEAR_MAX + "の範囲で入力して下さい");
-				}else{
-					break;
-				}
+	static void InputYear(Scanner scanner){
+		while(true){
+			System.out.print("カレンダーの年(半角数字)を入力して下さい > ");
+			str = scanner.next();
+			m = p.matcher(str);
+			
+			if(!m.find()){
+				System.out.println("[Error]数字を入力して下さい > ");
+				continue;
+			}
+			
+			year = Integer.parseInt(str);
+			
+			if(!(YEAR_MIN <= year && year <= YEAR_MAX)){
+				System.out.println("[Error]" + YEAR_MIN + "から" + YEAR_MAX + "の範囲で入力して下さい");
+			}else{
+				break;
 			}
 		}
 		return;
 	}
 	
 	//月入力用関数
-	static void InputMonth(){
-		try(Scanner scanner = new Scanner(System.in)){	//try-with-resource文によりscannerを自動的に閉じてくれる
-			while(true){
-				System.out.print("カレンダーの月(半角数字)を入力して下さい > ");
-				str = scanner.next();
-				m = p.matcher(str);
-				if(!m.find()){
-					System.out.println("[Error]数字を入力して下さい > ");
-					continue;
-				}
-				
-				month = Integer.parseInt(str);
-				if(!(MONTH_MIN <= month && month <= MONTH_MAX)){
-					System.out.println("[Error]" + MONTH_MIN + "から" + MONTH_MAX + "の範囲で入力して下さい");
-				}else{
-					break;
-				}
+	static void InputMonth(Scanner scanner){
+		while(true){
+			System.out.print("カレンダーの月(半角数字)を入力して下さい > ");
+			str = scanner.next();
+			m = p.matcher(str);
+			
+			if(!m.find()){
+				System.out.println("[Error]数字を入力して下さい > ");
+				continue;
+			}
+			
+			month = Integer.parseInt(str);
+			
+			if(!(MONTH_MIN <= month && month <= MONTH_MAX)){
+				System.out.println("[Error]" + MONTH_MIN + "から" + MONTH_MAX + "の範囲で入力して下さい");
+			}else{
+				break;
 			}
 		}
 		return;
